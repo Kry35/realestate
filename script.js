@@ -33,7 +33,7 @@ function displayApartments() {
             <h2>${apartment.name}</h2>
             <p>Alan: ${apartment.area}</p>
             <p>Oda Sayısı: ${apartment.rooms}</p>
-            <button onclick="openMap(${apartment.lat}, ${apartment.lon})">Konumu Göster</button>
+            <button onclick="openMap(${apartment.lat}, ${apartment.lon}, '${apartment.name}')">Konumu Göster</button>
         `;
         apartmentsDiv.appendChild(apartmentDiv);
     });
@@ -47,11 +47,21 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Konumu haritada gösterme
-function openMap(lat, lon) {
+// Konumu haritada gösterme ve Google Maps linki ekleme
+function openMap(lat, lon, apartmentName) {
+    // Haritada o konumu merkezle
     map.setView(new L.LatLng(lat, lon), 16);
+    
+    // Google Maps bağlantısını oluştur
+    const googleMapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
+    
+    // İşaretçi ekle
     L.marker([lat, lon]).addTo(map)
-        .bindPopup("Hedef Konum")
+        .bindPopup(`
+            <b>${apartmentName}</b><br>
+            Konum: ${lat}, ${lon}<br>
+            <a href="${googleMapsLink}" target="_blank">Google Maps'te Konumu Göster</a>
+        `)
         .openPopup();
 }
 
