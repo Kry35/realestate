@@ -6,7 +6,7 @@ const apartments = [
         rooms: "1+1 Daire Bahçe Katı",
         lat: 37.10566,
         lon: 27.66128,
-        photo: "resim/kocagoz.png",
+        photo: "kocagoz.png",
         status: "Kiralık" // Satılık veya Kiralık
     },
     {
