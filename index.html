@@ -9,12 +9,25 @@
 </head>
 <body>
     <h1>Daire Bilgileri ve Konumlar</h1>
-    
+		<div class="filter-container">
+    <label for="statusFilter" style="margin-right: 10px; font-weight: bold; font-size: 18px;">Filtrele:</label>
+    <select id="statusFilter" onchange="filterApartments()">
+        <option value="Tümü">Tümü</option>
+        <option value="Satılık">Satılık</option>
+        <option value="Kiralık">Kiralık</option>
+    </select>
+</div>
+
     <div id="apartments">
         <!-- Daire bilgileri buraya eklenecek -->
     </div>
 
     <div id="map" style="height: 400px; width: 100%;"></div>
+	
+	<div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-image" src="" alt="Büyük Görüntü" />
+    <span id="lightbox-close" onclick="closeLightbox()">×</span>
+</div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="script.js"></script>
