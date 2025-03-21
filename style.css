@@ -1,9 +1,9 @@
 /* Genel Sayfa Stili */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #e0f7fa; /* Açık mavi ton */
+    background-color: #e0f7fa;
     color: #333;
     overflow-x: hidden;
 }
@@ -12,7 +12,7 @@ body {
 h1 {
     text-align: center;
     padding: 20px;
-    background-color: #00796b; /* Koyu mavi-yeşil ton */
+    background-color: #00796b;
     color: white;
     margin: 0;
     font-size: 30px;
@@ -29,7 +29,6 @@ h2 {
     margin: 20px 0;
 }
 
-
 /* Daire Listesi */
 #apartments {
     padding: 15px;
@@ -37,26 +36,30 @@ h2 {
     max-width: 800px;
 }
 
-.apartment-photo {
-    width: 100px; /* Fotoğrafın genişliği */
-    height: auto; /* Yükseklik oranı korunur */
-    border-radius: 5px; /* Köşe yuvarlama */
-    margin-top: 10px;
+/* Fiyat bilgisi */
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff5733;
 }
 
+/* Daire kartları */
 .apartment {
-    background-color: #ffffff;
     border: 1px solid #00796b;
-    border-radius: 12px;
     padding: 20px;
     margin-bottom: 20px;
+    border-radius: 12px;
+    background-color: #ffffff;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .apartment:hover {
-    transform: translateY(-8px); /* Hoverda yukarı kayma efekti */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Hoverda gölge efekti */
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .apartment h2 {
@@ -71,26 +74,40 @@ h2 {
     color: #555;
 }
 
-/* Lightbox stili */
+/* Fotoğraf Stili */
+.apartment-photo {
+    width: 120px;
+    height: auto;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.apartment-photo:hover {
+    transform: scale(1.05);
+}
+
+/* Lightbox (Büyütülmüş fotoğraf) */
 #lightbox {
-    display: none; /* Başlangıçta gizli */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8); /* Koyu arka plan */
+    background: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
+    animation: fadeIn 0.5s;
     z-index: 1000;
 }
 
-#lightbox-image {
-    max-width: 90%; /* Fotoğrafın genişliği */
-    max-height: 90%; /* Fotoğrafın yüksekliği */
-    object-fit: contain; /* Fotoğrafın oranlarını koruyarak tam ekrana sığdır */
+#lightbox img {
+    max-width: 90%;
+    max-height: 90%;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 0px 40px 10px rgba(255, 255, 255, 0.8);
+    animation: glowEffect 1.5s infinite alternate;
 }
 
 #lightbox-close {
@@ -100,14 +117,26 @@ h2 {
     color: white;
     font-size: 30px;
     cursor: pointer;
-    z-index: 1001;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes glowEffect {
+    from {
+        box-shadow: 0px 0px 40px 10px rgba(255, 255, 255, 0.8);
+    }
+    to {
+        box-shadow: 0px 0px 60px 20px rgba(255, 255, 255, 1);
+    }
 }
 
 /* Filtreleme alanı */
 .filter-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     margin: 20px 0;
 }
 
@@ -120,22 +149,19 @@ h2 {
     border: none;
     border-radius: 25px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s;
     outline: none;
     cursor: pointer;
 }
 
-/* Hover efekti */
 #statusFilter:hover {
     background: linear-gradient(135deg, #fad0c4 0%, #ff9a9e 100%);
     transform: scale(1.05);
 }
 
-/* Açılır liste ok simgesi */
 #statusFilter:focus {
     box-shadow: 0px 0px 12px rgba(255, 80, 100, 0.8);
 }
-
 
 /* Butonlar */
 button {
@@ -147,19 +173,18 @@ button {
     cursor: pointer;
     width: 100%;
     font-size: 18px;
-    letter-spacing: 1px;
-    transition: transform 0.2s ease-in-out, background-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.2s, box-shadow 0.3s;
 }
 
 button:hover {
-    background-color: #004d40; /* Hoverda renk değişimi */
-    transform: scale(1.05); /* Hoverda buton büyür */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Hoverda gölge artırılır */
+    background-color: #004d40;
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 button:active {
-    background-color: #00332b; /* Tıklama rengi */
-    transform: scale(1); /* Tıklama sonrası normal boyut */
+    background-color: #00332b;
+    transform: scale(1);
 }
 
 /* Harita */
@@ -171,7 +196,7 @@ button:active {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobil Uyumluluk - Responsiveness */
+/* Mobil Uyumluluk */
 @media (max-width: 768px) {
     h1 {
         font-size: 26px;
@@ -183,7 +208,7 @@ button:active {
     }
 
     .apartment {
-        padding: 15px;
+        flex-direction: column;
     }
 
     button {
@@ -204,11 +229,6 @@ button:active {
 
     h2 {
         font-size: 18px;
-    }
-
-    .apartment {
-        padding: 12px;
-        margin-bottom: 15px;
     }
 
     button {

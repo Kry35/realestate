@@ -7,26 +7,80 @@ const apartments = [
         lat: 37.10566,
         lon: 27.66128,
         photo: "kocagoz.png",
-        status: "Kiralık" // Satılık veya Kiralık
+        status: "Kiralık",
+        price: "15.000/ay TL"
     },
     {
-        name: "Daire 2",
-        area: "70m²",
-        rooms: "2 Oda",
-        lat: 37.4250,
-        lon: 27.1450,
-        photo: "daire2.jpg",
-        status: "Kiralık"
+        name: "Yeşil Vadi Evleri Satılık",
+        area: "65m²",
+        rooms: "2+1 Daire Ara Kat",
+        lat: 37.12167,
+        lon: 27.65289,
+        photo: "yesilvadi.png",
+        status: "Satılık",
+        price: "3.500.000 TL"
+    },
+	 {
+        name: "Can Apartmanı Satılık",
+        area: "Bilinmiyor²",
+        rooms: "2+1 En Üst Kat",
+        lat: 37.10869,
+        lon: 27.65497,
+        photo: "canapt.png",
+        status: "Satılık",
+        price: "3.250.000 TL"
+    },
+	 {
+        name: "Fatma Kaya Evleri Satılık",
+        area: "Bilinmiyor²",
+        rooms: "2+1 En Üst Kat",
+        lat: 37.10881,
+        lon: 27.66366,
+        photo: "fatmakaya.png",
+        status: "Satılık",
+        price: "3.250.000 TL"
+    },
+		 {
+        name: "Yağız Evlerinin Karşısı Satılık",
+        area: "60²",
+        rooms: "2+1 Bahçe Katı",
+        lat: 37.10438,
+        lon: 27.66779,
+        photo: "bahcekat.png",
+        status: "Satılık",
+        price: "3.000.000 TL"
+    },
+	{
+        name: "Ender Evleri Satılık",
+        area: "65²",
+        rooms: "2+1 Ara Kat",
+        lat: 37.10424,
+        lon: 27.67049,
+        photo: "enderevleri.png",
+        status: "Satılık",
+        price: "3.500.000 TL"
+    },
+		{
+        name: "Bahçıvan Evleri Satılık",
+        area: "60²",
+        rooms: "2+1 Ara Kat",
+        lat: 37.10471,
+        lon: 27.67243,
+        photo: "bahcivanevleri.png",
+        status: "Satılık",
+        price: "3.500.000 TL"
     },
     {
-        name: "Daire 3",
-        area: "100m²",
-        rooms: "4 Oda",
-        lat: 37.4260,
-        lon: 27.1470,
-        photo: "daire3.jpg",
-        status: "Satılık"
+        name: "Yıldırım İnşaat Satılık",
+        area: "Bilinmiyor",
+        rooms: "2+1 Ara Kat Ebevyn Banyolu",
+        lat: 37.10869,
+        lon: 27.65497,
+        photo: "yildiriminsaat.png",
+        status: "Satılık",
+        price: "3.650.000 TL"
     }
+	
 ];
 
 // Daireleri listeleme fonksiyonu (Filtreleme destekli)
@@ -40,12 +94,15 @@ function displayApartments(filter = "Tümü") {
             const apartmentDiv = document.createElement('div');
             apartmentDiv.classList.add('apartment');
             apartmentDiv.innerHTML = `
-                <h2>${apartment.name}</h2>
                 <img src="${apartment.photo}" alt="${apartment.name}" class="apartment-photo" onclick="openLightbox('${apartment.photo}')" />
-                <p>Alan: ${apartment.area}</p>
-                <p>Oda Sayısı: ${apartment.rooms}</p>
-                <p><strong>Durum:</strong> ${apartment.status}</p>
-                <button onclick="openMap(${apartment.lat}, ${apartment.lon}, '${apartment.name}')">Konumu Göster</button>
+                <div class="apartment-info">
+                    <h2>${apartment.name}</h2>
+                    <p><strong>Alan:</strong> ${apartment.area}</p>
+                    <p><strong>Oda Sayısı:</strong> ${apartment.rooms}</p>
+                    <p><strong>Durum:</strong> ${apartment.status}</p>
+                    <p><strong>Fiyat:</strong> <span class="price">${apartment.price}</span></p>
+                    <button onclick="openMap(${apartment.lat}, ${apartment.lon}, '${apartment.name}')">Konumu Göster</button>
+                </div>
             `;
             apartmentsDiv.appendChild(apartmentDiv);
         });
@@ -57,17 +114,17 @@ function filterApartments() {
     displayApartments(filterValue);
 }
 
-// Fotoğrafı büyük göstermek için Lightbox
-function openLightbox(photoSrc) {
+// Fotoğraf büyütme (mobil uyumlu, ışıklı efektli)
+function openLightbox(photo) {
     const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightbox-image');
-    lightbox.style.display = 'flex';
-    lightboxImage.src = photoSrc;
+    const lightboxImg = document.getElementById('lightbox-img');
+    lightbox.style.display = "flex";
+    lightboxImg.src = photo;
 }
 
-// Lightbox'ı kapatma
+// Fotoğraf kapatma
 function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
+    document.getElementById('lightbox').style.display = "none";
 }
 
 // Harita başlatma
@@ -78,9 +135,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Konumu haritada gösterme
+// Konumu haritada gösterme ve Google Maps linki ekleme
 function openMap(lat, lon, apartmentName) {
     map.setView(new L.LatLng(lat, lon), 16);
+
     const googleMapsLink = `https://www.google.com/maps?q=${lat},${lon}`;
 
     L.marker([lat, lon]).addTo(map)
@@ -92,7 +150,7 @@ function openMap(lat, lon, apartmentName) {
         .openPopup();
 }
 
-// Sayfa yüklendiğinde tüm daireleri göster
+// Sayfa yüklendiğinde daireleri göster
 window.onload = () => {
     displayApartments();
 };
