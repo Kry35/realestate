@@ -8,7 +8,7 @@ const apartments = [
         lon: 27.66128,
         photo: "kocagoz.png",
         status: "Kiralık",
-        price: "15.000/ay TL"
+        price: "20.000/ay TL"
     },
     {
         name: "Yeşil Vadi Evleri Satılık",
