@@ -1,85 +1,28 @@
 // Dairelerin verileri (örnek)
 const apartments = [
     {
-        name: "Kocagöz Evleri Kiralık",
-        area: "50m²",
-        rooms: "1+1 Daire Bahçe Katı",
-        lat: 37.10566,
-        lon: 27.66128,
-        photo: "kocagoz.png",
+        name: "Villa Lüx Çelik Apartmanı Kiralık",
+        area: "80m²",
+        rooms: "2+1 Daire Bahçe Katı (Mert Portföy)",
+        lat: 37.10486,
+        lon: 27.66974,
+        photo: "villalux.png",
+        status: "Kiralık",
+        price: "18.000/ay TL"
+	
+	
+    },
+    {
+        name: "Pazar Yeri Alt Taraf",
+        area: "65m²",
+        rooms: "2+1 Daire Kat 3 Çift Balkonlu (Mert Portföy)",
+        lat: 37.10569,
+        lon: 27.65939,
+        photo: "pazaryeri.png",
         status: "Kiralık",
         price: "20.000/ay TL"
     },
-    {
-        name: "Yeşil Vadi Evleri Satılık",
-        area: "65m²",
-        rooms: "2+1 Daire Ara Kat",
-        lat: 37.12167,
-        lon: 27.65289,
-        photo: "yesilvadi.png",
-        status: "Satılık",
-        price: "3.500.000 TL"
-    },
-	 {
-        name: "Can Apartmanı Satılık",
-        area: "Bilinmiyor²",
-        rooms: "2+1 En Üst Kat",
-        lat: 37.10869,
-        lon: 27.65497,
-        photo: "canapt.png",
-        status: "Satılık",
-        price: "3.250.000 TL"
-    },
-	 {
-        name: "Fatma Kaya Evleri Satılık",
-        area: "Bilinmiyor²",
-        rooms: "2+1 En Üst Kat",
-        lat: 37.10881,
-        lon: 27.66366,
-        photo: "fatmakaya.png",
-        status: "Satılık",
-        price: "3.250.000 TL"
-    },
-		 {
-        name: "Yağız Evlerinin Karşısı Satılık",
-        area: "60²",
-        rooms: "2+1 Bahçe Katı",
-        lat: 37.10438,
-        lon: 27.66779,
-        photo: "bahcekat.png",
-        status: "Satılık",
-        price: "3.000.000 TL"
-    },
-	{
-        name: "Ender Evleri Satılık",
-        area: "65²",
-        rooms: "2+1 Ara Kat",
-        lat: 37.10424,
-        lon: 27.67049,
-        photo: "enderevleri.png",
-        status: "Satılık",
-        price: "3.500.000 TL"
-    },
-		{
-        name: "Bahçıvan Evleri Satılık",
-        area: "60²",
-        rooms: "2+1 Ara Kat",
-        lat: 37.10471,
-        lon: 27.67243,
-        photo: "bahcivanevleri.png",
-        status: "Satılık",
-        price: "3.500.000 TL"
-    },
-    {
-        name: "Yıldırım İnşaat Satılık",
-        area: "Bilinmiyor",
-        rooms: "2+1 Ara Kat Ebevyn Banyolu",
-        lat: 37.10869,
-        lon: 27.65497,
-        photo: "yildiriminsaat.png",
-        status: "Satılık",
-        price: "3.650.000 TL"
-    }
+	 
 	
 ];
 
