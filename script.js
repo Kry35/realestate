@@ -1,26 +1,26 @@
 // Dairelerin verileri (örnek)
 const apartments = [
     {
-        name: "Villa Lüx Çelik Apartmanı Kiralık",
-        area: "80m²",
-        rooms: "2+1 Daire Bahçe Katı (Mert Portföy)",
-        lat: 37.10486,
-        lon: 27.66974,
-        photo: "villalux.png",
-        status: "Kiralık",
-        price: "18.000/ay TL"
+        name: "Villa Lüx Satılık Bahçe Katı",
+        area: "60m²",
+        rooms: "2+1 Daire Bahçe Katı (Hakkı Taş)",
+        lat: 37.10874,
+        lon: 27.66803,
+        photo: "hakkitas.jpg",
+        status: "Satılık",
+        price: "3.600.000 TL"
 	
 	
     },
     {
-        name: "Pazar Yeri Alt Taraf",
+        name: "Pekdemir Evleri Kiralık",
         area: "65m²",
-        rooms: "2+1 Daire Kat 3 Çift Balkonlu (Mert Portföy)",
+        rooms: "2+1 Daire Ara Kat (Mahir Bey)",
         lat: 37.10569,
         lon: 27.65939,
-        photo: "pazaryeri.png",
+        photo: "pekdemir.jpg",
         status: "Kiralık",
-        price: "20.000/ay TL"
+        price: "23.000/ay TL"
     },
 	 
 	

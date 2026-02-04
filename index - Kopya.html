@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daire Bilgileri</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+</head>
+<body>
+    <h1>Daire Bilgileri ve Konumlar</h1>
+<div class="filter-container">
+    <label for="statusFilter" style="margin-right: 10px; font-weight: bold; font-size: 18px;">Filtrele:</label>
+    <select id="statusFilter" onchange="filterApartments()">
+        <option value="Tümü">Tümü</option>
+        <option value="Satılık">Satılık</option>
+        <option value="Kiralık">Kiralık</option>
+    </select>
+</div>
+
+<div id="apartments"></div>
+
+
+
+    <div id="map" style="height: 400px; width: 100%;"></div>
+	
+<!-- Lightbox (Büyütülmüş fotoğraf) -->
+<div id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Büyütülmüş Resim">
+</div>
+
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
