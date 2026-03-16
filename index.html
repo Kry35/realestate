@@ -199,31 +199,65 @@
             });
         }
 
-// Kodun içindeki handleImage fonksiyonunu bununla değiştir:
 function handleImage(input) {
     if (input.files && input.files[0]) {
         const reader = new FileReader();
-        reader.onload = e => {
+        
+        // Yükleme başladığında kullanıcıya geri bildirim verelim
+        document.getElementById('upload-hint').innerText = "⏳ İşleniyor...";
+
+        reader.onload = function(e) {
             const img = new Image();
+            img.crossOrigin = "anonymous"; // Güvenlik hatalarını önlemek için
             img.src = e.target.result;
-            img.onload = () => {
+
+            img.onload = function() {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
-                const maxW = 800; // Genişliği sınırla (Hız için)
-                const scale = maxW / img.width;
-                canvas.width = maxW;
-                canvas.height = img.height * scale;
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                 
-                // Resmi sıkıştırıp değişkene atıyoruz
-                activePhoto = canvas.toDataURL("image/webp", 0.6);
+                // Resmi çok büyükse küçültüyoruz (Mobil cihazı yormamak için)
+                let width = img.width;
+                let height = img.height;
+                const max_size = 1000; // Maksimum 1000px genişlik/yükseklik
+
+                if (width > height) {
+                    if (width > max_size) {
+                        height *= max_size / width;
+                        width = max_size;
+                    }
+                } else {
+                    if (height > max_size) {
+                        width *= max_size / height;
+                        height = max_size;
+                    }
+                }
+
+                canvas.width = width;
+                canvas.height = height;
                 
-                // Önizlemeyi göster
-                const previewImg = document.getElementById('preview-img');
-                const uploadHint = document.getElementById('upload-hint');
-                previewImg.src = activePhoto;
-                previewImg.style.display = 'block';
-                uploadHint.style.display = 'none';
+                // Çizim işlemi
+                ctx.drawImage(img, 0, 0, width, height);
+                
+                try {
+                    // Kaliteyi %50'ye çekerek veri boyutunu küçültüyoruz
+                    activePhoto = canvas.toDataURL("image/jpeg", 0.5);
+                    
+                    // Ekranda göster
+                    const previewImg = document.getElementById('preview-img');
+                    const uploadHint = document.getElementById('upload-hint');
+                    
+                    previewImg.src = activePhoto;
+                    previewImg.style.display = 'block';
+                    uploadHint.style.display = 'none';
+                    uploadHint.innerText = "📸 Fotoğraf Ekle"; // Yazıyı eski haline getir
+                } catch (err) {
+                    console.error("Resim işlenirken hata oluştu:", err);
+                    alert("Fotoğraf işlenemedi, lütfen daha küçük bir fotoğraf deneyin.");
+                }
+            };
+            
+            img.onerror = function() {
+                alert("Resim yüklenirken bir hata oluştu.");
             };
         };
         reader.readAsDataURL(input.files[0]);
