@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aykan Kiray Realty</title>
+    <title>Elite PRO | Aykan Kiray Realty</title>
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -17,21 +17,19 @@
         .logo span { color: var(--accent); font-weight: 700; }
         .add-btn { background: var(--accent); border: none; width: 45px; height: 45px; border-radius: 12px; font-size: 28px; cursor: pointer; color: #000; display: flex; align-items: center; justify-content: center; }
         .container { padding: 20px; display: grid; gap: 20px; }
-        .card { background: var(--glass); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; animation: fadeIn 0.5s ease; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .card { background: var(--glass); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; }
         .card-img { width: 100%; height: 220px; object-fit: cover; background: #1a1a1a; }
         .card-body { padding: 18px; }
         .price { font-size: 24px; font-weight: 700; color: var(--accent); }
         .card-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .card-btns button { padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; transition: 0.3s; }
-        .card-btns button:active { transform: scale(0.95); background: var(--accent); color: #000; }
-        .share-btn { grid-column: span 2; background: #25d366 !important; color: #000 !important; border: none !important; font-size: 14px !important; }
+        .card-btns button { padding: 12px; border-radius: 12px; border: 1px solid var(--border); background: rgba(255,255,255,0.03); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .share-btn { grid-column: span 2; background: #25d366 !important; color: #000 !important; border: none !important; }
         .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 2000; backdrop-filter: blur(10px); }
         .modal-content { position: absolute; bottom: 0; width: 100%; background: #12171e; border-radius: 30px 30px 0 0; padding: 25px; box-sizing: border-box; max-height: 90vh; overflow-y: auto; }
-        .input-box { background: var(--glass); border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: #fff; width: 100%; box-sizing: border-box; margin-bottom: 12px; font-family: inherit; font-size: 15px; }
+        .input-box { background: var(--glass); border: 1px solid var(--border); padding: 14px; border-radius: 12px; color: #fff; width: 100%; box-sizing: border-box; margin-bottom: 12px; font-family: inherit; }
         .gps-btn { width: 100%; padding: 12px; border: 1px solid var(--accent); background: transparent; color: var(--accent); border-radius: 12px; font-weight: bold; margin-bottom: 12px; }
         #preview-map { height: 160px; border-radius: 15px; margin-bottom: 15px; border: 1px solid var(--border); }
-        .save-btn { width: 100%; padding: 16px; background: var(--accent); border: none; border-radius: 14px; font-weight: 800; font-size: 16px; color: #000; cursor: pointer; }
+        .save-btn { width: 100%; padding: 16px; background: var(--accent); border: none; border-radius: 14px; font-weight: 800; color: #000; cursor: pointer; }
         .upload-area { height: 120px; border: 2px dashed var(--border); border-radius: 18px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px; overflow: hidden; background: var(--glass); }
         .upload-area img { width: 100%; height: 100%; object-fit: cover; }
     </style>
@@ -49,42 +47,42 @@
 
     <div id="adminModal" class="modal">
         <div class="modal-content">
-            <h2 id="modal-title" style="margin-top:0; font-weight: 700;">Yeni İlan</h2>
+            <h2 id="modal-title" style="margin-top:0;">Yeni İlan</h2>
             <input type="hidden" id="edit-id" value="-1">
             
             <div class="upload-area" onclick="document.getElementById('file-in').click()">
                 <input type="file" id="file-in" hidden accept="image/*" onchange="previewImage(this)">
                 <img id="img-preview" style="display:none">
-                <span id="upload-txt">📸 Mülk Fotoğrafı Seç / Çek</span>
+                <span id="upload-txt">📸 Fotoğraf Seç</span>
             </div>
 
-            <input type="text" id="in-name" placeholder="İlan Başlığı (Örn: Havuzlu Villa)" class="input-box">
+            <input type="text" id="in-name" placeholder="İlan Başlığı" class="input-box">
             <div style="display:flex; gap:10px">
                 <input type="number" id="in-price" placeholder="Fiyat (₺)" class="input-box">
                 <input type="number" id="in-area" placeholder="Alan (m²)" class="input-box">
             </div>
-            <input type="text" id="in-rooms" placeholder="Oda Sayısı (Örn: 4+1)" class="input-box">
+            <input type="text" id="in-rooms" placeholder="Oda Sayısı (3+1)" class="input-box">
             
             <div id="preview-map"></div>
             <div style="display:flex; gap:10px">
                 <input type="number" step="any" id="in-lat" placeholder="Enlem" class="input-box" oninput="updatePreviewMap()">
                 <input type="number" step="any" id="in-lon" placeholder="Boylam" class="input-box" oninput="updatePreviewMap()">
             </div>
-            <button class="gps-btn" onclick="getGPS()">📍 Şu Anki Konumu İşaretle</button>
+            <button class="gps-btn" onclick="getGPS()">📍 Mevcut Konumu Kullan</button>
 
             <select id="in-status" class="input-box">
                 <option value="Satılık">Satılık</option>
                 <option value="Kiralık">Kiralık</option>
             </select>
 
-            <button class="save-btn" id="btn-save-main" onclick="saveData()">BULUTA GÖNDER</button>
-            <button onclick="closeModal()" style="width:100%; background:none; border:none; color:#ff4444; margin-top:20px; font-weight: 600;">İptal Et</button>
+            <button class="save-btn" id="btn-save-main" onclick="saveData()">BULUTA KAYDET</button>
+            <button onclick="closeModal()" style="width:100%; background:none; border:none; color:#666; margin-top:15px;">İptal</button>
         </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // --- SENİN FIREBASE BİLGİLERİN ---
+        // --- FIREBASE YAPILANDIRMASI ---
         const firebaseConfig = {
             apiKey: "AIzaSyC991-RPWUC49t09yHqPrGhhvcMZKYTdhU",
             authDomain: "aykankirayrealty.firebaseapp.com",
@@ -95,41 +93,42 @@
             appId: "1:625916623720:web:3470dce7c7538f014af4dd"
         };
 
-        // Firebase Başlatma
         firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
         let currentImg = "";
         let previewMap, previewMarker;
 
-        // Verileri Dinle ve Listele
+        // Veri Dinleme
         database.ref('ilanlar').on('value', (snapshot) => {
             const data = snapshot.val();
             const list = [];
             for (let id in data) { list.push({ id, ...data[id] }); }
             display(list);
+        }, (error) => {
+            document.getElementById('app-list').innerHTML = `<p style="text-align:center; color:red;">Bağlantı Hatası: Kuralları kontrol et!</p>`;
         });
 
         function display(items) {
             const listDiv = document.getElementById('app-list');
             listDiv.innerHTML = "";
-            if (items.length === 0) {
-                listDiv.innerHTML = '<p style="text-align:center; opacity:0.5; margin-top:50px;">Henüz aktif ilan bulunmuyor.</p>';
+            if (!items || items.length === 0) {
+                listDiv.innerHTML = '<p style="text-align:center; opacity:0.5; margin-top:50px;">Henüz ilan yok.</p>';
                 return;
             }
             items.reverse().forEach((item) => {
                 const card = document.createElement('div');
                 card.className = "card";
                 card.innerHTML = `
-                    <img src="${item.photo || 'https://via.placeholder.com/600x400/222/fff?text=Resim+Yok'}" class="card-img">
+                    <img src="${item.photo || ''}" class="card-img">
                     <div class="card-body">
                         <div class="price">${Number(item.price).toLocaleString('tr-TR')} ₺</div>
-                        <h2 style="margin:5px 0; font-size:20px;">${item.name}</h2>
-                        <p style="opacity:0.6; font-size:14px; margin-bottom: 15px;">${item.rooms} • ${item.area} • ${item.status}</p>
+                        <h2 style="margin:5px 0; font-size:19px;">${item.name}</h2>
+                        <p style="opacity:0.6; font-size:13px;">${item.rooms} • ${item.area} • ${item.status}</p>
                         <div class="card-btns">
-                            <button onclick="window.open('https://www.google.com/maps?q=${item.lat},${item.lon}', '_blank')">🌐 Navigasyon</button>
+                            <button onclick="window.open('https://www.google.com/maps?q=${item.lat},${item.lon}', '_blank')">🌐 Harita</button>
                             <button onclick="editMode('${item.id}')">⚙️ Düzenle</button>
-                            <button class="share-btn" onclick="shareWa('${item.id}')">WhatsApp İle Paylaş</button>
-                            <button onclick="deleteItem('${item.id}')" style="grid-column: span 2; border:none; color:#666; font-size:11px; margin-top:10px;">İlanı Sistemden Kaldır</button>
+                            <button class="share-btn" onclick="shareWa('${item.id}')">WhatsApp Paylaş</button>
+                            <button onclick="deleteItem('${item.id}')" style="grid-column: span 2; border:none; color:#ff4444; font-size:11px; margin-top:5px;">İlanı Sil</button>
                         </div>
                     </div>
                 `;
@@ -140,17 +139,15 @@
         // Kayıt ve Güncelleme
         function saveData() {
             const id = document.getElementById('edit-id').value;
-            const saveBtn = document.getElementById('btn-save-main');
-            
-            if(!document.getElementById('in-name').value) { alert("Lütfen başlık girin!"); return; }
+            const btn = document.getElementById('btn-save-main');
+            btn.innerText = "Yükleniyor...";
+            btn.disabled = true;
 
-            saveBtn.innerText = "İşleniyor...";
-            saveBtn.disabled = true;
-
+            const areaVal = document.getElementById('in-area').value;
             const itemData = {
                 name: document.getElementById('in-name').value,
                 price: document.getElementById('in-price').value,
-                area: document.getElementById('in-area').value + " m²",
+                area: areaVal.includes("m²") ? areaVal : areaVal + " m²",
                 rooms: document.getElementById('in-rooms').value,
                 lat: document.getElementById('in-lat').value,
                 lon: document.getElementById('in-lon').value,
@@ -159,23 +156,17 @@
             };
 
             if (id === "-1") {
-                database.ref('ilanlar').push(itemData).then(() => finishSave());
+                database.ref('ilanlar').push(itemData).then(() => closeModal());
             } else {
                 if (!currentImg) {
                     database.ref('ilanlar/' + id).once('value').then(snap => {
                         itemData.photo = snap.val().photo;
-                        database.ref('ilanlar/' + id).set(itemData).then(() => finishSave());
+                        database.ref('ilanlar/' + id).set(itemData).then(() => closeModal());
                     });
                 } else {
-                    database.ref('ilanlar/' + id).set(itemData).then(() => finishSave());
+                    database.ref('ilanlar/' + id).set(itemData).then(() => closeModal());
                 }
             }
-        }
-
-        function finishSave() {
-            document.getElementById('btn-save-main').innerText = "BULUTA GÖNDER";
-            document.getElementById('btn-save-main').disabled = false;
-            closeModal();
         }
 
         function editMode(id) {
@@ -195,13 +186,13 @@
                     document.getElementById('img-preview').style.display = "block";
                     document.getElementById('upload-txt').style.display = "none";
                 }
-                document.getElementById('modal-title').innerText = "İlanı Güncelle";
+                document.getElementById('modal-title').innerText = "Düzenle";
                 openModal();
                 setTimeout(updatePreviewMap, 500);
             });
         }
 
-        // Harita Fonksiyonları
+        // Yardımcı Fonksiyonlar
         function initPreviewMap() {
             if (previewMap) return;
             previewMap = L.map('preview-map', {zoomControl: false}).setView([38.41, 27.12], 10);
@@ -224,7 +215,7 @@
                     document.getElementById('in-lat').value = p.coords.latitude.toFixed(6);
                     document.getElementById('in-lon').value = p.coords.longitude.toFixed(6);
                     updatePreviewMap();
-                }, () => alert("Konum erişimi engellendi!"));
+                });
             }
         }
 
@@ -234,3 +225,45 @@
                 reader.onload = e => {
                     const img = new Image();
                     img.src = e.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const scale = 800 / img.width;
+                        canvas.width = 800; canvas.height = img.height * scale;
+                        canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+                        currentImg = canvas.toDataURL("image/webp", 0.6);
+                        document.getElementById('img-preview').src = currentImg;
+                        document.getElementById('img-preview').style.display = "block";
+                        document.getElementById('upload-txt').style.display = "none";
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function shareWa(id) {
+            database.ref('ilanlar/' + id).once('value').then(snap => {
+                const item = snap.val();
+                const url = `https://www.google.com/maps?q=${item.lat},${item.lon}`;
+                const msg = `🏠 *${item.name}*\n💰 ${Number(item.price).toLocaleString('tr-TR')} ₺\n📐 ${item.area}\n🔢 ${item.rooms}\n📍 Konum: ${url}`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`, '_blank');
+            });
+        }
+
+        function openModal() { document.getElementById('adminModal').style.display = "block"; initPreviewMap(); }
+        function closeModal() {
+            document.getElementById('adminModal').style.display = "none";
+            document.getElementById('edit-id').value = "-1";
+            document.getElementById('btn-save-main').innerText = "BULUTA KAYDET";
+            document.getElementById('btn-save-main').disabled = false;
+            document.querySelectorAll('.input-box').forEach(el => el.value = "");
+            document.getElementById('img-preview').style.display = "none";
+            document.getElementById('upload-txt').style.display = "block";
+            currentImg = "";
+        }
+
+        function deleteItem(id) {
+            if(confirm("Silinsin mi?")) { database.ref('ilanlar/' + id).remove(); }
+        }
+    </script>
+</body>
+</html>
