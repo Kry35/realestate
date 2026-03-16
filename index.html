@@ -199,24 +199,36 @@
             });
         }
 
-        function handleImage(input) {
-            const reader = new FileReader();
-            reader.onload = e => {
-                const img = new Image();
-                img.src = e.target.result;
-                img.onload = () => {
-                    const canvas = document.createElement('canvas');
-                    const scale = 800 / img.width;
-                    canvas.width = 800; canvas.height = img.height * scale;
-                    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-                    activePhoto = canvas.toDataURL("image/webp", 0.6);
-                    document.getElementById('preview-img').src = activePhoto;
-                    document.getElementById('preview-img').style.display='block';
-                    document.getElementById('upload-hint').style.display='none';
-                }
+// Kodun içindeki handleImage fonksiyonunu bununla değiştir:
+function handleImage(input) {
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = new Image();
+            img.src = e.target.result;
+            img.onload = () => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const maxW = 800; // Genişliği sınırla (Hız için)
+                const scale = maxW / img.width;
+                canvas.width = maxW;
+                canvas.height = img.height * scale;
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                
+                // Resmi sıkıştırıp değişkene atıyoruz
+                activePhoto = canvas.toDataURL("image/webp", 0.6);
+                
+                // Önizlemeyi göster
+                const previewImg = document.getElementById('preview-img');
+                const uploadHint = document.getElementById('upload-hint');
+                previewImg.src = activePhoto;
+                previewImg.style.display = 'block';
+                uploadHint.style.display = 'none';
             };
-            reader.readAsDataURL(input.files[0]);
-        }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
         function openForm() { document.getElementById('itemModal').style.display='block'; }
         function closeForm() { document.getElementById('itemModal').style.display='none'; document.getElementById('edit-id').value="-1"; }
