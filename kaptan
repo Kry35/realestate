@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Aykan Kıray Kaptan Paneli v1.0</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css">
+	<link rel="manifest" href="manifest.json">
 
+<script>
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
+  }
+</script>
+</head>
+<body>
+
+    <div id="map"></div>
+
+    <div class="ui-panel">
+        <div class="menu-row">
+            <button id="btn-mark" onclick="setMode('mark')" class="active">📍 Mera İşaretle</button>
+            <button id="btn-route" onclick="setMode('route')">📏 Rota Ölçer</button>
+        </div>
+        <div class="info-row">
+            <span id="status-text">Mod: Mera İşaretleme</span>
+            <span id="distance-val"></span>
+        </div>
+        <div class="action-row">
+            <button onclick="clearAllData()" class="btn-danger">🗑️ Tüm Verileri Sil</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
